@@ -7,7 +7,7 @@
 <style>
 	.background{
     background-image:url("./images/Japanese_Clasws_Form_Background.png");
-      background-repeat: repeat;
+    background-repeat: repeat;
     background-size:cover;
       margin:5em 0 5em 0;
       align-items:center;
@@ -78,6 +78,10 @@
         font-weight: bold;
         color:rgba(107,0,0,1);
         font-size:2em;
+        display:flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: start;
     }
     
     .text-input{
@@ -85,7 +89,7 @@
         background: rgb(255, 255, 255);
         color:Black;
         font-size:1rem;
-        letter-spacing: 0.2em;
+        letter-spacing: 0.2em; 
         border-width:0.5em;
         border-style: solid;
         border-image: radial-gradient(rgb(255, 255, 255), rgb(168,0,0)) 1;
@@ -140,6 +144,16 @@
         background-image:radial-gradient(circle at top right, rgb(232, 147, 147) -90%, rgb(88, 7, 7) 100%);
 	}
 
+    .info{
+        color:grey;
+        font-weight:200;
+        font-size:0.45em;
+        text-align:right;
+        margin-top: inherit;
+        width:100%;
+        letter-spacing:0.21em;
+    }
+
     @media screen and (max-width: 48em){
         .form{
             width: 75% !important;
@@ -151,6 +165,20 @@
         .message-box{
             margin:0 0.5em 0 0.5em !important;
             width: 75% !important;
+        }
+        .field-group label{
+            flex-direction: column;
+            align-content: center;
+            justify-content: start;
+        }
+        .info{
+            color:grey;
+            font-weight:200;
+            font-size:0.4em;
+            text-align:left;
+            letter-spacing:0.5em;
+            margin-top: inherit;
+            width:100%;
         }
     }
 
@@ -192,9 +220,22 @@
             margin:0 0.5em 0 0.5em !important;
             width: 75% !important;
             text-align: center;
+            display: flex;
+            align-items: center;
+            letter-spacing:0.25em;
         }
 
         .button-group button{
+            width:100%;
+        }
+
+        .info{
+            color:grey;
+            font-weight:200;
+            font-size:0.4em;
+            text-align:left;
+            letter-spacing:0.5em;
+            margin-top: inherit;
             width:100%;
         }
     }
@@ -210,13 +251,9 @@
                     </section>
                     <section class="message message-box" id="submissionMessage">
                         <h3 id="submissionMessageText"></h3>
-                        <h1>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                              <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
-                          </svg>
+                        <h1 id="submissionIconImage">
                         </h1>
                         <button class="button" type="submit" value="Submit" id="newSubmissionButton">
-                          Make New Submission
                         </button>
                     </section>
                     <form id="submissionForm" class="form">
@@ -233,7 +270,9 @@
                           <div id="emailAddressValidator" class="validator"></div>
                         </div>
                         <div class="field-group">
-                        <label for="lname">Phone</label>
+                            <label for="lname">
+                                Phone <span class="info">(format: xxx-xxx-xxxx)</span>
+                            </label>
                           <input class="text-input" type="text" id="phoneNumber"/>
                           <div id="phoneNumberValidator" class="validator"></div>
                         </div>
