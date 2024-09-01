@@ -73,9 +73,7 @@ var dataFieldsToSubmit = {
     dataFieldsToSubmit[e.target.id] = e.target.value;
   }
   
-  function submitForm(e){
-    e.preventDefault();
-    var dataToSubmit = Object.values(dataFieldsToSubmit);
+  function submitForm(){
     var formIsValid = validateForm();
   
     if(formIsValid){
