@@ -438,13 +438,13 @@
                 "Content-Type": "application/json",
               }
             }).then(function() {
-              //REACTIVATE THIS WHEN DONE!!!
               handleFormSumission({
-                responseType:"Success"
+                responseType:"Success",
               });
-            }).catch(function(){
+            }).catch(function(error){
               handleFormSumission({
-                responseType:"Error"
+                responseType:"Error",
+
               });
               throw new Error("Could not submit");
             }) 
@@ -469,7 +469,8 @@
     }catch(err){
       console.log("Oops! "+err);
       handleFormSumission({
-        responseType:"Error"
+        responseType:"Error",
+        errorText:err
         });
     }
   }
@@ -598,7 +599,7 @@
       return condition;
   };
   
-  function handleFormSumission(messageType){
+  function handleFormSumission(messageType, errorText){
     var loadingMessage = document.getElementById("loadingMessage");
     var loadingMessageText = document.getElementById("loadingMessageText");
     var submissionMessage = document.getElementById("submissionMessage");
@@ -607,7 +608,7 @@
     var newSubmissionButton = document.getElementById("newSubmissionButton");
   
     submissionIconContainer.innerHTML =  messageIconsByType[messageType.responseType].icon;
-    submissionMessageText.innerText = messageIconsByType[messageType.responseType].message;
+    submissionMessageText.innerText = messageIconsByType[messageType.responseType].message + "\n" + errorText;
     newSubmissionButton.innerText = messageIconsByType[messageType.responseType].resetButtonText;
     loadingMessage.style.display = "none";
     loadingMessageText.innerText = "";
