@@ -442,35 +442,40 @@
                 responseType:"Success",
               });
             }).catch(function(error){
+              console.log("ERROR 1", error);
               handleFormSumission({
                 responseType:"Error",
-
+                errorText:error
               });
               throw new Error("Could not submit");
             }) 
-          }).catch(function(){
+          }).catch(function(error){
+            console.log("ERROR 2", error)
             handleFormSumission({
-                responseType:"Error"
+                responseType:"Error",
+                errorText:error
               });
             throw new Error("Could not submit");
           });
-        }).catch(function(){
+        }).catch(function(error){
+          console.log("ERROR 3", error)
             handleFormSumission({
-                responseType:"Error"
+                responseType:"Error",
+                errorText:error
               });
           throw new Error("Could not submit");
         });
       }else{
         handleFormSumission({
-                responseType:"Error"
-              });
+            responseType:"Error",
+        });
         throw new Error("Could not submit");
       }
     }catch(err){
-      console.log("Oops! "+err);
-      handleFormSumission({
-        responseType:"Error",
-        errorText:err
+      console.log("ERROR 4", error)
+        handleFormSumission({
+            responseType:"Error",
+            errorText:err
         });
     }
   }
