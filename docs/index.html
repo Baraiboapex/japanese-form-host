@@ -372,13 +372,15 @@
   }
   
   function submitForm(){
-    var formIsValid = validateForm();
-  
-    if(formIsValid){
-      sendData();
-    }else{
-      invalidateData();
-    }
+    //var formIsValid = validateForm();
+    
+    sendData();
+
+    // if(formIsValid){
+    //   sendData();
+    // }else{
+    //   invalidateData();
+    // }
   }
   
   function sendData(){
