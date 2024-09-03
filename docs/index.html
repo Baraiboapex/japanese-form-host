@@ -396,8 +396,7 @@
     var targetUrl = "https://sum-auth-server-aged-smoke-7979.fly.dev/solution";
       
     try{
-      if(new URLSearchParams(dataFieldsToSubmit).getAll().length > 0){
-        fetch(proxyUrl,{
+      fetch(proxyUrl,{
           method:"GET",
           headers:{
             "Target-URL":targetUrl,
@@ -447,7 +446,7 @@
                 responseType:"Error",
                 errorText:error
               });
-              //throw new Error("Could not submit");
+              throw new Error("Could not submit");
             }) 
           }).catch(function(error){
             console.log("ERROR 2", error)
@@ -455,7 +454,7 @@
                 responseType:"Error",
                 errorText:error
               });
-            //throw new Error("Could not submit");
+            throw new Error("Could not submit");
           });
         }).catch(function(error){
           console.log("ERROR 3", error)
@@ -463,14 +462,8 @@
                 responseType:"Error",
                 errorText:error
               });
-          //throw new Error("Could not submit");
+          throw new Error("Could not submit");
         });
-      }else{
-        handleFormSumission({
-            responseType:"Error",
-        });
-        //throw new Error("Could not submit");
-      }
     }catch(err){
       handleFormSumission({
         responseType:"Error",
