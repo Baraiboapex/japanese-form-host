@@ -398,6 +398,10 @@
     try{
       if(new URLSearchParams(dataFieldsToSubmit).size > 0){
         console.log(dataFieldsToSubmit);
+        handleFormSumission({
+          responseType:"Error",
+          errorText:error
+        });
         // fetch(proxyUrl,{
         //   method:"GET",
         //   headers:{
