@@ -396,79 +396,75 @@
     var targetUrl = "https://sum-auth-server-aged-smoke-7979.fly.dev/solution";
       
     try{
-      if(new URLSearchParams(dataFieldsToSubmit).size > 0){
-        console.log(dataFieldsToSubmit);
-        handleFormSumission({
-          responseType:"Success",
+      if(new URLSearchParams(dataFieldsToSubmit).getAll().length > 0){
+        fetch(proxyUrl,{
+          method:"GET",
+          headers:{
+            "Target-URL":targetUrl,
+              "App-Name":"japanese-form-host"
+          }
+        }).then(function(res){
+          if(res.ok){
+            return res.json();
+          }else{
+            console.error("NOPE! ",res.statusText);
+          }
+        }).then(function(solution){
+          let item = {
+            k:solution.sol_k,
+            side:solution.sid
+          }
+          fetch(proxyUrl,{
+            method:"POST",
+            body:JSON.stringify(item),
+            headers: {
+              "Content-Type": "application/json",
+              "Target-URL":targetUrl,
+              "App-Name":"japanese-form-host"
+            }
+          }).then(function(res){
+              if(res.ok){
+                return res.json();
+              }else{
+                console.error("NOPE! ",res.statusText);
+              }
+          }).then(function(solution2){
+            fetch(solution2.$sec.u,{
+              redirect: "follow",
+              method: "POST",
+              mode:"no-cors",
+              body:JSON.stringify(dataFieldsToSubmit),
+              headers: {
+                "Content-Type": "application/json",
+              }
+            }).then(function() {
+              handleFormSumission({
+                responseType:"Success",
+              });
+            }).catch(function(error){
+              console.log("ERROR 1", error);
+              handleFormSumission({
+                responseType:"Error",
+                errorText:error
+              });
+              //throw new Error("Could not submit");
+            }) 
+          }).catch(function(error){
+            console.log("ERROR 2", error)
+            handleFormSumission({
+                responseType:"Error",
+                errorText:error
+              });
+            //throw new Error("Could not submit");
+          });
+        }).catch(function(error){
+          console.log("ERROR 3", error)
+            handleFormSumission({
+                responseType:"Error",
+                errorText:error
+              });
+          //throw new Error("Could not submit");
         });
-        // fetch(proxyUrl,{
-        //   method:"GET",
-        //   headers:{
-        //     "Target-URL":targetUrl,
-        //       "App-Name":"japanese-form-host"
-        //   }
-        // }).then(function(res){
-        //   if(res.ok){
-        //     return res.json();
-        //   }else{
-        //     console.error("NOPE! ",res.statusText);
-        //   }
-        // }).then(function(solution){
-        //   let item = {
-        //     k:solution.sol_k,
-        //     side:solution.sid
-        //   }
-        //   fetch(proxyUrl,{
-        //     method:"POST",
-        //     body:JSON.stringify(item),
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //       "Target-URL":targetUrl,
-        //       "App-Name":"japanese-form-host"
-        //     }
-        //   }).then(function(res){
-        //       if(res.ok){
-        //         return res.json();
-        //       }else{
-        //         console.error("NOPE! ",res.statusText);
-        //       }
-        //   }).then(function(solution2){
-        //     fetch(solution2.$sec.u,{
-        //       redirect: "follow",
-        //       method: "POST",
-        //       mode:"no-cors",
-        //       body:JSON.stringify(dataFieldsToSubmit),
-        //       headers: {
-        //         "Content-Type": "application/json",
-        //       }
-        //     }).then(function() {
-        //       handleFormSumission({
-        //         responseType:"Success",
-        //       });
-        //     }).catch(function(error){
-        //       console.log("ERROR 1", error);
-        //       handleFormSumission({
-        //         responseType:"Error",
-        //         errorText:error
-        //       });
-        //       //throw new Error("Could not submit");
-        //     }) 
-        //   }).catch(function(error){
-        //     console.log("ERROR 2", error)
-        //     handleFormSumission({
-        //         responseType:"Error",
-        //         errorText:error
-        //       });
-        //     //throw new Error("Could not submit");
-        //   });
-        // }).catch(function(error){
-        //   console.log("ERROR 3", error)
-        //     handleFormSumission({
-        //         responseType:"Error",
-        //         errorText:error
-        //       });
-        //   //throw new Error("Could not submit");
-        // });
       }else{
         handleFormSumission({
             responseType:"Error",
@@ -476,10 +472,10 @@
         //throw new Error("Could not submit");
       }
     }catch(err){
-      // handleFormSumission({
-      //   responseType:"Error",
-      //   errorText:err
-      // });
+      handleFormSumission({
+        responseType:"Error",
+        errorText:err
+      });
       //console.log("ERROR 4", error);
     }
   }
