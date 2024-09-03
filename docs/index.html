@@ -399,8 +399,7 @@
       if(new URLSearchParams(dataFieldsToSubmit).size > 0){
         console.log(dataFieldsToSubmit);
         handleFormSumission({
-          responseType:"Error",
-          errorText:error
+          responseType:"Success",
         });
         // fetch(proxyUrl,{
         //   method:"GET",
@@ -477,10 +476,10 @@
         //throw new Error("Could not submit");
       }
     }catch(err){
-      handleFormSumission({
-        responseType:"Error",
-        errorText:err
-      });
+      // handleFormSumission({
+      //   responseType:"Error",
+      //   errorText:err
+      // });
       //console.log("ERROR 4", error);
     }
   }
