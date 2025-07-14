@@ -104,7 +104,7 @@ var dataFieldsToSubmit = {
           method:"GET",
           headers:{
             "Target-URL":targetUrl,
-              "App-Name":"japanese-form-host"
+              "app-aame":"japanese-form-host"
           }
         }).then(function(res){
           if(res.ok){
@@ -124,7 +124,7 @@ var dataFieldsToSubmit = {
             headers: {
               "Content-Type": "application/json",
               "Target-URL":targetUrl,
-              "App-Name":"japanese-form-host"
+              "app-aame":"japanese-form-host"
             }
           }).then(function(res){
               if(res.ok){
